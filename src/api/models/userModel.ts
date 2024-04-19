@@ -2,12 +2,13 @@
 // intface User is located in src/interfaces/User.ts
 
 import mongoose from 'mongoose';
-import {User} from '../../interfaces/User';
+import {User} from '../../types/DBTypes';
 
 const userModel = new mongoose.Schema<User>({
   user_name: {
     type: String,
-    required: true,
+    minlength: [3, 'Username must be at least 3 characters'],
+    unique: true,
   },
   email: {
     type: String,
@@ -21,7 +22,7 @@ const userModel = new mongoose.Schema<User>({
   },
   password: {
     type: String,
-    required: true,
+    minlength: [4, 'Password must be at least 4 characters'],
   },
 });
 
